@@ -7,14 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by wanghongxing on 16/2/17.
+ * Created by wanghongxing on 16/2/18.
  */
-public class DemoJob extends AbstractElasticJob {
+public class DemoJob2 extends AbstractElasticJob {
 
     @Override
     protected void executeJob(JobExecutionMultipleShardingContext shardingContext) {
 
-        System.out.println("job1 run-------------");
+        System.out.println("job2 run-------------");
 
         //job in this
         int count = shardingContext.getShardingTotalCount();
@@ -27,4 +27,5 @@ public class DemoJob extends AbstractElasticJob {
         System.out.println();
 
     }
+
 }
