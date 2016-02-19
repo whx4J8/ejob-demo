@@ -31,11 +31,13 @@ public class Main{
         JobConfiguration jobConfig = new JobConfiguration("simpleJob", DemoJob.class, 1, "0/5 * * * * ?");//配置job
         //jobConfig.setOverwrite(true);// 将本地的任务更新到zk上,正在跑的任务也会被立即更新
         JobConfiguration jobConfig2 = new JobConfiguration("simpleJob2", DemoJob2.class, 1, "0/10 * * * * ?");//配置job
+        jobConfig.setOverwrite(Boolean.TRUE);
 
         regCenter.init();//注册中心启动
 
         new JobScheduler(regCenter,jobConfig).init();//任务启动
         new JobScheduler(regCenter,jobConfig2).init();//任务启动
+
         System.out.println("init complete.");
     }
 
