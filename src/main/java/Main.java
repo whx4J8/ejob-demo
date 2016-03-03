@@ -4,6 +4,7 @@ import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperRegistryCenter;
 import job.DemoJob;
+import job.PerpetualElasticJob;
 
 /**
  * Created by wanghongxing on 16/2/17.
@@ -25,11 +26,10 @@ public class Main{
 
         CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(zkConf);//注册中心
 
-        JobConfiguration jobConfig = new JobConfiguration("simpleJob", DemoJob.class, 1, "0/5 * * * * ?");//配置job
-        jobConfig.setOverwrite(true);// 将本地的任务更新到zk上,正在跑的任务也会被立即更新
-
         regCenter.init();//注册中心启动
 
+        JobConfiguration jobConfig = new JobConfiguration("perpetualElasticJob", PerpetualElasticJob.class,1,"0 32 14 * * ?");
+        jobConfig.setOverwrite(true);
         new JobScheduler(regCenter,jobConfig).init();//任务启动
 
         System.out.println("init complete.");
