@@ -3,7 +3,6 @@ import com.dangdang.ddframe.job.api.JobScheduler;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.reg.zookeeper.ZookeeperRegistryCenter;
-import job.DemoJob;
 import job.PerpetualElasticJob;
 
 /**
@@ -28,7 +27,7 @@ public class Main{
 
         regCenter.init();//注册中心启动
 
-        JobConfiguration jobConfig = new JobConfiguration("perpetualElasticJob", PerpetualElasticJob.class,1,"0 32 14 * * ?");
+        JobConfiguration jobConfig = new JobConfiguration("perpetualElasticJob", PerpetualElasticJob.class,1,"0/5 * * * * ?");
         jobConfig.setOverwrite(true);
         new JobScheduler(regCenter,jobConfig).init();//任务启动
 

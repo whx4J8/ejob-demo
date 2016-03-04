@@ -9,7 +9,7 @@ import java.util.Queue;
 
 /**
  *
- * 流式获取数据,直到数据都被消耗
+ * 流式获取数据,直到数据都被消耗掉
  *
  * Created by wanghongxing on 16/3/2.
  */
@@ -35,15 +35,15 @@ public class PerpetualElasticJob extends AbstractPerpetualElasticJob<Integer> {
     }
 
     private List<Integer> fetchData(){
-        List<Integer> datas = Lists.newArrayList();
-        append(DATAS.poll(),datas);
-        append(DATAS.poll(),datas);
+        List<Integer> results = Lists.newArrayList();
+        append(DATAS.poll(),results);
+        append(DATAS.poll(),results);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return datas;
+        return results;
     }
 
     private void append(Integer data , List<Integer> datas){
